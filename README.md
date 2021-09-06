@@ -45,7 +45,7 @@ belongs_to :users
  Column             | Type                | Options                 |
 |----------------|---------------------|-------------------------|
 | postal code           | string              | null: false             |
-| prefectures         | string              | null: false             |
+| prefectures_id         | integer              | null: false             |
 | municipalities      | string              | null: false             |
 | address             | string              | null: false             |
 | building name       | string              |                         |
@@ -62,7 +62,7 @@ belongs_to :items
 | postal code         | string              | null: false             |
 | prefectures         | string              | null: false             |
 | municipalities      | string              | null: false             |
-
+| fee_id              | integer             | null:false
 
 ## Association
 
