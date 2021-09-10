@@ -9,10 +9,9 @@
 | nickname           | string              | null: false             |
 | first_name         | string              | null: false             |
 | last_name          | string              | null: false             |
-| nickname           | string              | null: false             |
 | first_name_kana         | string              | null: false             |
 | last_name_kana           | string              | null: false             |
-| birthday            | string              | null: false
+| birthday            | date              | null: false
 
 
 
@@ -28,17 +27,17 @@ has_many :records
 |-------------------|---------------------|-------------------------|
 | name              | string              | null: false             |
 | category_id          | integer              | null: false             |
-| price             | string              | null: false             |
-| exhibitor         | string              | null: false             |
-| explanation       | string              | null: false             |
+| price             | integer             | null: false             |
+| exhibitor_id         | string              | null: false             |
+| explanation_id       | text             | null: false             |
 | status_id            | integer             | null: false             |
 | days_id              | integer              | null: false             |
-| id                | reference           | foreign_key: true       |
+| user              | reference           | foreign_key: true       |
 ## Association
 
-belongs_to :shippings
-has_one :records
-belongs_to :users
+
+has_one :record
+belongs_to :user
 
 ## shippings table  #発送先情報
 
@@ -52,8 +51,8 @@ belongs_to :users
 | phone               | string              | null: false             |
 
 ## Association
-has_many :records
-belongs_to :items
+belongs_to :record
+belongs_to :item
 
 ## records table #購入記録
 
@@ -66,7 +65,7 @@ belongs_to :items
 
 ## Association
 
-belongs_to :items
-belongs_to :shippings
-
+has_many :shippings
+belongs_to :shipping
+belongs_to :user
 
