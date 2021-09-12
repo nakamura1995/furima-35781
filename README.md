@@ -29,7 +29,7 @@ has_many :records
 | category_id          | integer              | null: false             |
 | price             | integer             | null: false             |
 | exhibitor_id         | string              | null: false             |
-| explanation_id       | text             | null: false             |
+| explanation_id       | integer             | null: false             |
 | status_id            | integer             | null: false             |
 | days_id              | integer              | null: false             |
 | user              | reference           | foreign_key: true       |
@@ -43,29 +43,28 @@ belongs_to :user
 
  Column             | Type                | Options                 |
 |----------------|---------------------|-------------------------|
-| postal code           | string              | null: false             |
+| postal_code           | string              | null: false             |
 | prefectures_id         | integer              | null: false             |
 | municipalities      | string              | null: false             |
 | address             | string              | null: false             |
-| building name       | string              |                         |
+| building_name       | string              |                         |
 | phone               | string              | null: false             |
 
 ## Association
-belongs_to :record
-belongs_to :item
+has_one :record
+
 
 ## records table #購入記録
 
  Column             | Type                | Options                 |
 |--------------------|---------------------|-------------------------|
-| postal code         | string              | null: false             |
-| prefectures         | string              | null: false             |
-| municipalities      | string              | null: false             |
-| fee_id              | integer             | null:false
+| user        | reference              | foreign_key: true             |
+| item         | reference              | foreign_key: true           |
+| 
 
 ## Association
 
-has_many :shippings
+belongs_to :item
 belongs_to :shipping
 belongs_to :user
 
