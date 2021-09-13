@@ -33,8 +33,7 @@ has_many :records
 | status_id            | integer             | null: false             |
 | days_id              | integer              | null: false             |
 | user              | references           | foreign_key: true       |
-| description       | integer             | nul: false               |
-| prefectures_id          | integer              | null: false
+| description       | text             | nul: false               
 ## Association
 
 
@@ -54,7 +53,7 @@ belongs_to :user
 | record              | references          | foreign_key: true       |  
 
 ## Association
-has_many :records
+belongs_to :records
 
 
 ## records table #購入記録
@@ -63,11 +62,11 @@ has_many :records
 |--------------------|---------------------|-------------------------|
 | user        | references              | foreign_key: true             |
 | item         | references              | foreign_key: true           |
-| 
+
 
 ## Association
 
 belongs_to :item
-belongs_to :shipping
 belongs_to :user
+has_one :shipping
 
