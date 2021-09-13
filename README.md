@@ -28,11 +28,13 @@ has_many :records
 | name              | string              | null: false             |
 | category_id          | integer              | null: false             |
 | price             | integer             | null: false             |
-| exhibitor_id         | string              | null: false             |
+| exhibitor_id         | integer              | null: false             |
 | explanation_id       | integer             | null: false             |
 | status_id            | integer             | null: false             |
 | days_id              | integer              | null: false             |
-| user              | reference           | foreign_key: true       |
+| user              | references           | foreign_key: true       |
+| description       | integer             | nul: false               |
+| prefectures_id          | integer              | null: false
 ## Association
 
 
@@ -49,17 +51,18 @@ belongs_to :user
 | address             | string              | null: false             |
 | building_name       | string              |                         |
 | phone               | string              | null: false             |
+| record              | references          | foreign_key: true       |  
 
 ## Association
-has_one :record
+has_many :records
 
 
 ## records table #購入記録
 
  Column             | Type                | Options                 |
 |--------------------|---------------------|-------------------------|
-| user        | reference              | foreign_key: true             |
-| item         | reference              | foreign_key: true           |
+| user        | references              | foreign_key: true             |
+| item         | references              | foreign_key: true           |
 | 
 
 ## Association
