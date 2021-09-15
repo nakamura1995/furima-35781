@@ -28,13 +28,12 @@ has_many :records
 | name              | string              | null: false             |
 | category_id          | integer              | null: false             |
 | price             | integer             | null: false             |
-| exhibitor_id         | integer              | null: false             |
 | explanation_id       | integer             | null: false             |
 | status_id            | integer             | null: false             |
 | days_id              | integer              | null: false             |
 | user              | references           | foreign_key: true       |
 | description       | text             | nul: false               
-| prefectures       | integer              | null: false             |
+| prefectures_id       | integer              | null: false             |
 ## Association
 
 
