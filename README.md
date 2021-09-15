@@ -34,7 +34,7 @@ has_many :records
 | days_id              | integer              | null: false             |
 | user              | references           | foreign_key: true       |
 | description       | text             | nul: false               
-| prefectures_id         | integer              | null: false             |
+| prefectures       | integer              | null: false             |
 ## Association
 
 
