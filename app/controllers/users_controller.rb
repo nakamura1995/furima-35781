@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :move_to_index, except: [:index, :show]
   before_action :move_to_index, except: [:index, :show]
 
 
@@ -24,4 +26,3 @@ def move_to_index
   end
 end
 end
-
