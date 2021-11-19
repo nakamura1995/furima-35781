@@ -32,7 +32,7 @@ RSpec.describe User, type: :model do
       end 
     
       it 'emailに＠が含まれていないと登録できない'do      
-      @user.email = "@"
+      @user.email = "test.com"
       @user.valid?
       expect(@user.errors.full_messages).to include("Email is invalid")
       end
@@ -47,6 +47,17 @@ RSpec.describe User, type: :model do
           @user.password = 'aaaaaa'
           @user.valid?
           expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password is invalid")
+      end
+      it 'passwordは数字のみでは登録できない' do
+        @user.password = "1111111"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password is invalid")
+      end
+
+      it 'passwordは全角文字が含まれていると登録できない' do
+        @user.password = "AAAAAAA"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password is invalid")
       end
 
       it 'passwordとpassword_confirmationが不一致では登録できない' do
@@ -74,25 +85,45 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
-      it '名前(全角)は苗字と名前がなければ登録できない' do
+      it '名前(全角)は苗字がなければ登録できない' do
         @user.first_name = ""
-        @user.last_name = ""
+        @user.valid?
         expect(@user.errors.full_messages).to include()
     end
-    it '名前(全角カナ)は苗字と名前がなければ登録できない' do
-      @user.first_name_kana = ""
-      @user.last_name_kana = ""
+    it '名前(全角)は名前がなければ登録できない' do
+      @user.last_name = ""
+      @user.valid?
       expect(@user.errors.full_messages).to include()
   end
+    it '名前(全角カナ)は苗字がなければ登録できない' do
+      @user.first_name_kana = ""
+      expect(@user.errors.full_messages).to include()
+  end
+  it '名前（全角カナ）は名前がなければ登録できない' do
+    @user.last_name_kana =""
+
+    expect(@user.errors.full_messages).to include()
+  end
   it '名前は全角でなければ登録できない' do
-      @user.first_name = "中村"
       @user.last_name = "優汰"
+      @user.valid?
       expect(@user.errors.full_messages).to include()
     end
-    it'名前（カナ）は全角カナでなければ登録できない' do
-      @user.first_name_kana = "ナカムラ"
-      @user.last_name_kana = "ユウタ"
+    it '苗字は全角でなければ登録できない' do
+      @user.last_name = "中村"
+      @user.valid?
       expect(@user.errors.full_messages).to include()
+    end
+
+    it'名前（カナ）は全角カナでなければ登録できない' do
+      @user.last_name_kana = "ユウタ"
+      @user.valid?
+      expect(@user.errors.full_messages).to include()
+    end
+    it'苗字(カナ)は全角カナでなければ登録できない'do
+    @user.first_name_kana = "ナカムラ" 
+    @user.valid?
+    expect(@user.errors.full_messages).to include()
     end
 end
 end
