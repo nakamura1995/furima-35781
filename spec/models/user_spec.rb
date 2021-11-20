@@ -97,32 +97,34 @@ RSpec.describe User, type: :model do
   end
     it '名前(全角カナ)は苗字がなければ登録できない' do
       @user.first_name_kana = ""
-      expect(@user.errors.full_messages).to include()
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana can't be blank", "First name kana is invalid")
   end
   it '名前（全角カナ）は名前がなければ登録できない' do
     @user.last_name_kana =""
-    expect(@user.errors.full_messages).to include()
+    @user.valid?
+    expect(@user.errors.full_messages).to include("Last name kana can't be blank", "Last name kana is invalid")
   end
   it '名前は全角でなければ登録できない' do
-      @user.last_name = "優汰"
+      @user.last_name = "yuta"
       @user.valid?
-      expect(@user.errors.full_messages).to include()
+      expect(@user.errors.full_messages).to include("Last name is invalid")
     end
     it '苗字は全角でなければ登録できない' do
-      @user.first_name = "中村"
+      @user.first_name = "nakamura"
       @user.valid?
-      expect(@user.errors.full_messages).to include()
+      expect(@user.errors.full_messages).to include("First name is invalid")
     end
 
     it'名前（カナ）は全角カナでなければ登録できない' do
-      @user.last_name_kana = "ユウタ"
+      @user.last_name_kana = "aaa"
       @user.valid?
-      expect(@user.errors.full_messages).to include()
+      expect(@user.errors.full_messages).to include("Last name kana is invalid")
     end
     it'苗字(カナ)は全角カナでなければ登録できない'do
-    @user.first_name_kana = "ナカムラ" 
+    @user.first_name_kana = "aaa" 
     @user.valid?
-    expect(@user.errors.full_messages).to include()
+    expect(@user.errors.full_messages).to include("First name kana is invalid")
     end
 end
 end
