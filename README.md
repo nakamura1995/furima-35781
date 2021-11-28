@@ -32,7 +32,7 @@ has_many :records
 | status_id            | integer             | null: false             |
 | days_id              | integer              | null: false             |
 | user              | references           | foreign_key: true       |
-| description       | text             | nul: false               
+| description        | text             | nul: false               ## 配送料の負担
 | prefectures_id       | integer              | null: false             |
 ## Association
 
