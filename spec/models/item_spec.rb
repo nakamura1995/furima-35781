@@ -1,5 +1,104 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
+  before do
+    @item = FactoryBot.build(:item)
+  end
+
+  describe "商品出品機能" do
+    context '商品出品できる時' do
+       it '商品名があれば登録できる' do
+         expect(@item).to be_valid
+         @item.name = 'aaaaa'
+       end
+
+       it '画像があれば保存できる' do
+        @item.image = nil
+        expect(@item).to be_valid
+      end
+
+      it 'priceが300円なら出品できる' do
+        @item.price = 300
+        expect(@item).to be_valid
+      end
+      it 'priceが9,999,999円なら出品できる' do
+        @item.price = 9_999_999
+        expect(@item).to be_valid
+      end
+      it 'priceが半角なら出品できる' do
+        @item.price = 300
+        expect(@item).to be_valid
+      end
+    end
+    
+       context '商品出品できない時'
+    it '商品名がなければ出品できない' do   
+            @item.name = ""
+            @item.valid?
+            expect(@item.errors.full_messages).to include("Name can't be blank")
+    end      
+    
+    it '商品の説明がなければ登録できない' do
+       @item.explanation = ""
+       @item.valid?
+       expect(@item.errors.full_messages).to include("Explanation can't be blank")
+     end
+     
+    it 'カテゴリーの情報がないと登録できない' do
+     @item.category = ""
+     @item.valid?
+     expect(@item.errors.full_messages).to include("Category can't be blank")
+     end
+     
+    it '商品の状態の入力がないと登録できない' do
+      @item.status = ""
+      @item.valid?
+      expect(@item.erroers.full_messages).to include("Status can't be blank")
+     end
+
+    it '配送料の負担の情報がないと登録できない' do
+     @item.description = ""
+     @item.valid?
+     expect(@item.errors.full_messages).to include("Description can't be blank")
+    end
+    
+    it'発送元の地域の入力がないと登録できない' do
+      @item.prefecture = ""
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+      end
+
+      it '発送までの日数の情報がないと登録できない' do
+        @item.days  = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Days can't be blank")
+      end
+    
+      it '価格の情報がないと登録できない' do
+      @item.price = ""
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price can't be blank")
+    end
+     it 'priceが9,999,999円以上だと出品できない' do
+      @item.price = 10_000_000
+       @item.valid?
+      expect(@item.errors.full_messages).to include('Price is not included in the list')
+    end
+    it 'priceが半角数字でないと出品できない' do
+      @item.price = '３００'
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Price is not included in the list')
+    end
+    it "priceが半角英数混合では登録できないこと" do
+      @item.price = "300dollars"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is not included in the list")
+    end
+    it "priceが半角英語だけでは登録できないこと" do
+      @item.price = "threemillion"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is not included in the list")
+    end
+    end
+  end
+
