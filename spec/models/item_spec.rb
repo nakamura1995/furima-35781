@@ -11,12 +11,7 @@ RSpec.describe Item, type: :model do
          expect(@item).to be_valid
          @item.name = 'aaaaa'
        end
-
-       it '画像があれば保存できる' do
-        @item.image = nil
-        expect(@item).to be_valid
-      end
-
+       
       it 'priceが300円なら出品できる' do
         @item.price = 300
         expect(@item).to be_valid
@@ -39,19 +34,19 @@ RSpec.describe Item, type: :model do
     end      
     
     it '商品の説明がなければ登録できない' do
-       @item.explanation = ""
+       @item.explanation_id = ""
        @item.valid?
        expect(@item.errors.full_messages).to include("Explanation can't be blank")
      end
      
     it 'カテゴリーの情報がないと登録できない' do
-     @item.category = ""
+     @item.category_id = ""
      @item.valid?
      expect(@item.errors.full_messages).to include("Category can't be blank")
      end
      
     it '商品の状態の入力がないと登録できない' do
-      @item.status = ""
+      @item.status_id = ""
       @item.valid?
       expect(@item.erroers.full_messages).to include("Status can't be blank")
      end
@@ -63,13 +58,13 @@ RSpec.describe Item, type: :model do
     end
     
     it'発送元の地域の入力がないと登録できない' do
-      @item.prefecture = ""
+      @item.prefectures_id = ""
       @item.valid?
       expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
 
       it '発送までの日数の情報がないと登録できない' do
-        @item.days  = ""
+        @item.days_id = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Days can't be blank")
       end
