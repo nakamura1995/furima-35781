@@ -8,6 +8,6 @@ FactoryBot.define do
     prefectures_id {2}
     price {'300'}
     user_id { FactoryBot.create(:user).id }
-    
+    description {'aaaa'}
   end
 end

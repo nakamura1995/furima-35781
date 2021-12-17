@@ -35,7 +35,7 @@ RSpec.describe Item, type: :model do
         end
         
     it '商品の説明がなければ登録できない' do
-       @item.description = ""
+      @item.description = ""
        @item.valid?
        expect(@item.errors.full_messages).to include("Description can't be blank")
      end
@@ -61,7 +61,7 @@ RSpec.describe Item, type: :model do
     it'発送元の地域の入力がないと登録できない' do
       @item.prefectures_id = ""
       @item.valid?
-      expect(@item.errors.full_messages).to include("User must exist", "Prefectures can't be blank", "Prefectures can't be blank", "Description can't be blank", "User can't be blank")
+      expect(@item.errors.full_messages).to include("Prefectures can't be blank")
       end
 
       it '発送までの日数の情報がないと登録できない' do
@@ -88,7 +88,7 @@ RSpec.describe Item, type: :model do
     it "priceが半角英数混合では登録できないこと" do
       @item.price = '300'+'dollar'      
       @item.valid?
-      expect(@item.errors.full_messages).to include("User must exist", "Description can't be blank", "User can't be blank", "Price is not a number")
+      expect(@item.errors.full_messages).to include("Price is not a number")
     end
     it "priceが半角英語だけでは登録できないこと" do
       @item.price = "threemillion"
