@@ -7,5 +7,7 @@ FactoryBot.define do
     days_id {2}
     prefectures_id {2}
     price {'300'}
+    user_id { FactoryBot.create(:user).id }
+    
   end
 end
