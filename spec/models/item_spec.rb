@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Item, type: :model do
   before do
+    
     @item = FactoryBot.build(:item)
   end
 
@@ -59,7 +60,7 @@ RSpec.describe Item, type: :model do
     end
     
     it'発送元の地域の入力がないと登録できない' do
-      @item.prefectures_id = 1
+      @item.prefectures_id = 0
       @item.valid?
       expect(@item.errors.full_messages).to include("Prefectures can't be blank")
       end
@@ -94,6 +95,24 @@ RSpec.describe Item, type: :model do
       @item.price = "threemillion"
       @item.valid?
       expect(@item.errors.full_messages).to include("Price is not included in the list")
+    end
+
+    it "商品価格が300円未満だと出品できない" do
+      @item.price = 200
+       @item.valid?
+      expect(@item.errors.full_messages).to include("Price is not included in the list")
+    end
+
+    it "画像が空では保存できない" do
+      @item.image = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Image can't be blank")
+    end
+
+    it 'userが紐付いていないと保存できない' do
+      @item.user = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include('User must exist')
     end
     end
   end

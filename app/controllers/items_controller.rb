@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
 
   before_action :move_to_index, except: [:index, :show, :require_login]
-  before_action :set_item, only: [:show, :edit, :update]
+ #before_action :set_item, only: [:show, :edit, :update]
   
    def index
-    @items = Item.all
+    #@items = Item.all
   end
 
 def new
@@ -32,8 +32,8 @@ def move_to_index
   redirect_to new_user_session_path unless user_signed_in?
 end
 
-def set_item
-  @items = Item.find(params[:id])
-end
+# def set_item
+#   @items = Item.find(params[:id])
+# end
 
 end
