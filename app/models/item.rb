@@ -23,9 +23,8 @@ validates :price, presence: true, inclusion: { in: 300..9_999_999 }, format: { w
 validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
 validates :explanation_id, numericality: { other_than: 1 ,message: "can't be blank" } 
 validates :days_id, numericality: { other_than: 1 , message: "can't be blank"} 
-validates :user_id, numericality: { other_than: 1 , message: "can't be blank"} 
 validates :status_id, numericality: { other_than: 1 , message: "can't be blank" }
-validates :prefectures_id, numericality: { other_than: 1 , message: "can't be blank" }  
+validates :prefectures_id, numericality: { other_than: 0 , message: "can't be blank" }  
 validates :price, numericality: true
 end
 
