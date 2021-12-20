@@ -14,8 +14,5 @@ FactoryBot.define do
      after(:build) do |item|
        item.image.attach(io: File.open('public/images/a.png'), filename: 'a.png')
       end
-      # after(:build) do |hoge|
-      #         image.attached = fixture_file_upload(Rails.root.join('public', 'images', 'a.png'), 'a.jpg')
-      #       end
-    end
+      end
 end
