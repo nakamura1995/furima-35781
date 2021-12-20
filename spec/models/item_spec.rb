@@ -41,31 +41,31 @@ RSpec.describe Item, type: :model do
      end
      
     it 'カテゴリーの情報がないと登録できない' do
-     @item.category_id = ""
+     @item.category_id = 1
      @item.valid?
      expect(@item.errors.full_messages).to include("Category can't be blank")
      end
      
     it '商品の状態の入力がないと登録できない' do
-      @item.status_id = ""
+      @item.status_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Status can't be blank")
      end
 
     it '配送料の負担の情報がないと登録できない' do
-     @item.explanation_id = ""
+     @item.explanation_id = 1
      @item.valid?
      expect(@item.errors.full_messages).to include("Explanation can't be blank")
     end
     
     it'発送元の地域の入力がないと登録できない' do
-      @item.prefectures_id = ""
+      @item.prefectures_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Prefectures can't be blank")
       end
 
       it '発送までの日数の情報がないと登録できない' do
-        @item.days_id = ""
+        @item.days_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Days can't be blank")
       end
