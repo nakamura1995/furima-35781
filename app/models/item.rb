@@ -10,23 +10,25 @@ belongs_to :status
 
 
 
-
-validates :category_id, presence: true
-validates :days_id, presence: true
-validates :name, presence: true
-validates :explanation_id, presence: true
-validates :prefectures_id, presence: true
-validates :status_id, presence: true
-validates :description, presence: true
-validates :price, presence: true, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
-validates :image, presence: true
-
-validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
-validates :explanation_id, numericality: { other_than: 1 ,message: "can't be blank" } 
-validates :days_id, numericality: { other_than: 1 , message: "can't be blank"} 
-validates :status_id, numericality: { other_than: 1 , message: "can't be blank" }
-validates :prefectures_id, numericality: { other_than: 0 , message: "can't be blank" }  
-validates :price, numericality: true
+with_options presence: true do
+  validates :category_id
+  validates :days_id
+  validates :name
+  validates :explanation_id
+  validates :prefectures_id
+  validates :status_id
+  validates :description
+  validates :price, presence: true, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
+  validates :image
 end
 
+with_options numericality: { other_than: 1 , message: "can't be blank"} do
+validates :category_id
+validates :explanation_id
+validates :days_id
+validates :status_id
+validates :prefectures_id 
+validates :price, numericality: true
+end
+end
 
