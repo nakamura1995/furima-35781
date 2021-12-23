@@ -1,5 +1,9 @@
 require 'rails_helper'
-
+RSpec.configure do |config|
+  config.before(:all) do
+    FactoryBot.reload
+  end
+end
 # Specs in this file have access to a helper object that includes
 # the ItemsHelper. For example:
 #
