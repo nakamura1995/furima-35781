@@ -4,8 +4,8 @@ FactoryBot.define do
     category_id { 2 }
     explanation_id { 2 }
     status_id { 2 }
-    days_id { 2 }
-    prefectures_id { 3 }
+    day_id { 2 }
+    prefecture_id { 3 }
     price { '300' }
     association :user
     description { 'aaaa' }
