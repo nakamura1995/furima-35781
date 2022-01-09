@@ -1,6 +1,6 @@
-class CreateDay < ActiveRecord::Migration[6.0]
+class CreateDays < ActiveRecord::Migration[6.0]
   def change
-    create_table :day do |t|
+    create_table :days do |t|
 
       t.timestamps
     end

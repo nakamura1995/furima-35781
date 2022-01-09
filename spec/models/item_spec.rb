@@ -57,15 +57,15 @@ RSpec.describe Item, type: :model do
       end
 
       it '発送元の地域の入力がないと登録できない' do
-        @item.prefecture_id = 0
+        @item.prefectures_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@item.errors.full_messages).to include("Prefectures can't be blank")
       end
 
       it '発送までの日数の情報がないと登録できない' do
-        @item.day_id = 1
+        @item.days_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Day can't be blank")
+        expect(@item.errors.full_messages).to include("Days can't be blank")
       end
 
       it '価格の情報がないと登録できない' do
