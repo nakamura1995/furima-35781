@@ -40,23 +40,23 @@ has_many :records
 has_one :record
 belongs_to :user
 
-## shippings table  #発送先情報
+## addresses table  #発送先情報
 
  Column             | Type                | Options                 |
 |----------------|---------------------|-------------------------|
 | postal_code           | string              | null: false             |
 | prefecture_id         | integer              | null: false             |
-| municipalities      | string              | null: false             |
+| municipality      | string              | null: false             |
 | address             | string              | null: false             |
 | building_name       | string              |                         |
 | phone               | string              | null: false             |
-| record              | references          | foreign_key: true       |  
+| order              | references          | foreign_key: true       |  
 
 ## Association
 belongs_to :record
 
 
-## records table #購入記録
+## orders table #購入記録
 
  Column             | Type                | Options                 |
 |--------------------|---------------------|-------------------------|
