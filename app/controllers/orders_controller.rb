@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item
   before_action :contributor_confirmation
-  # before_action :sold_out
+  before_action :sold_out
 
 
   def index
@@ -11,8 +11,7 @@ class OrdersController < ApplicationController
 
   def create
     @order_address = OrderAddress.new(order_params)
-    
-        if @order_address.valid?
+          if @order_address.valid?
           pay_item
           @order_address.save
           redirect_to root_path
@@ -38,17 +37,17 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = "sk_test_89958d3f8ca48da15757ab0b"   # 自身のPAY.JPテスト秘密鍵を記述しましょう
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
-      amount: order_params[:price],  # 商品の値段
+      amount: @item.price,  # 商品の値段
       card: order_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
   end
 
-  # def sold_out
-  #   redirect_to root_path if @item.order.present?
-  # end
+   def sold_out
+    redirect_to root_path if @item.order.present?
+  end
   
 
 end
