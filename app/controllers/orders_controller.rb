@@ -6,10 +6,12 @@ class OrdersController < ApplicationController
 
 
   def index
+   
     @order_address = OrderAddress.new
   end
 
   def create
+    
     @order_address = OrderAddress.new(order_params)
           if @order_address.valid?
           pay_item
@@ -35,6 +37,7 @@ class OrdersController < ApplicationController
   def contributor_confirmation
     redirect_to root_path if current_user.id == @item.user.id
   end
+end
 
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
@@ -48,6 +51,4 @@ class OrdersController < ApplicationController
    def sold_out
     redirect_to root_path if @item.order.present?
   end
-  
 
-end
