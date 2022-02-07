@@ -1,36 +1,15 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_item, only: [:show, :edit, :update,:destroy]
+  before_action :set_action, except: [:index, :new, :create, :search]
   before_action :contributor_confirmation, only: [:edit, :update, :destroy]
+  before_action :sold_out,only: [:edit, :update, :destroy]
   
-
   def index
-    @items = Item.order('created_at DESC')
-     end
+    @items = Item.order("created_at DESC")
+  end
 
   def new
     @item = Item.new
-  end
-
-  def show  
-  end
-
-  def edit
-  end
-
-  def destroy
-    if @item.destroy
-      redirect_to root_path
-    end
-  end
-
-
-  def update
-    if @item.update(item_params)
-      redirect_to item_path(@item.id)
-    else
-      render :edit
-    end
   end
 
   def create
@@ -42,18 +21,48 @@ class ItemsController < ApplicationController
     end
   end
 
-  private
-
-  def set_item
-    @item = Item.find(params[:id])
+  def show
   end
 
+  def edit
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to item_path(@item.id)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    if @item.destroy
+      redirect_to root_path
+    end
+  end
+
+  def search
+
+    @items = @search.result
+
+    @items = @search.result.order("created_at DESC") 
+  end
+ 
+  private
   def item_params
-    params.require(:item).permit(:image, :name, :category_id, :price, :explanation_id, :status_id, :day_id, :description,
-                                 :prefecture_id).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :description, :category_id, :status_id, :day_id, :prefecture_id, :explanation_id, :price, :image).merge(user_id: current_user.id)
   end
 
   def contributor_confirmation
     redirect_to root_path unless current_user.id == @item.user.id
   end
+
+  def set_action
+    @item = Item.find(params[:id])
+  end
+
+  def sold_out
+    redirect_to root_path if @item.order.present?
+  end
+
 end
