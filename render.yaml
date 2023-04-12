@@ -1,8 +1,8 @@
 databases:
   - name: furima-35781
     databaseName: furima-35781
-    user: rails7_sample
-    region: Oregon(US West)
+    user: shokichi0801
+    region: singapole
 
 services:
   - type: web
