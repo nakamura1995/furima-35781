@@ -2,13 +2,13 @@ databases:
   - name: furima-35781
     databaseName: furima-35781
     user: rails7_sample
-    region: Oregon
+    region: Oregon(US West)
 
 services:
   - type: web
     name: furima-35781  
     env: ruby
-    region: singapore
+    region: Oregon(US West)
     plan: free
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
